@@ -1,0 +1,31 @@
+# --- ExamGenerator: personal/generated exam results ---
+# result.md is written by the simulator after a run (personal scores); never hand-authored.
+ExamGenerator/GeneratedExams/*/result.md
+# Keep the documented worked example the README points to (parser-contract reference, synthetic — not a real result).
+!ExamGenerator/GeneratedExams/_sample/result.md
+
+# --- Claude Code local/personal settings ---
+.claude/settings.local.json
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# --- Editors / IDEs ---
+.vs/
+.vscode/
+.idea/
+*.swp
+
+# --- Node (npx serve / tooling) ---
+node_modules/
+npm-debug.log*
+
+# --- Python (python -m http.server) ---
+__pycache__/
+*.pyc
+
+# --- Logs ---
+*.log

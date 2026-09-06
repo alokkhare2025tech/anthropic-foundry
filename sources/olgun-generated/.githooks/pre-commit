@@ -1,0 +1,35 @@
+#!/bin/sh
+# Two checks before every commit:
+#   1. Regenerate GeneratedExams/manifest.json from disk, so a hand-edited or corrupted
+#      manifest can never be committed as-is. Blocks the commit once if a fix was needed
+#      (the fix is auto-staged); re-run `git commit`.
+#   2. Validate every exam against the format contract, so a broken exam.md/answer-key.md
+#      can't reach the simulator.
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "pre-commit: node not found on PATH, skipping manifest.json and exam format checks" >&2
+  exit 0
+fi
+
+if [ ! -f scripts/sync-manifest.js ]; then
+  exit 0
+fi
+
+node scripts/sync-manifest.js > /dev/null
+
+if ! git diff --quiet -- ExamGenerator/GeneratedExams/manifest.json; then
+  git add ExamGenerator/GeneratedExams/manifest.json
+  echo "manifest.json was out of sync with GeneratedExams/ — corrected and re-staged."
+  echo "Review the change, then run 'git commit' again."
+  exit 1
+fi
+
+if [ -f scripts/validate-exams.js ]; then
+  if ! node scripts/validate-exams.js; then
+    echo ""
+    echo "Exam format validation failed — fix the errors above, then run 'git commit' again."
+    exit 1
+  fi
+fi
+
+exit 0

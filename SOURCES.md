@@ -105,6 +105,128 @@ Nothing in the pipeline writes back into `sources/` — the parsers read, `data/
 only write target. That keeps re-fetching an upstream and diffing it against the archive a
 one-command check.
 
+---
+
+# Wave 2 — added 2026-09-06
+
+The first four sources are above. A wider sweep of the `ccar-f` / `cca-f` GitHub topics
+turned up a much larger ecosystem; these eight contributed questions and seven more
+shaped the cheat sheets without contributing any.
+
+## 8. utkarsh1agarwal — claude-architect-exam-guide
+
+- **URL:** https://github.com/utkarsh1agarwal/claude-architect-exam-guide
+- **Archived at:** `sources/utkarsh-mocks/`
+- **Contributed:** **341 questions** — the largest single source in the bank. Six full
+  60-question mock exams, each organised around all six official scenarios, with separate
+  answer-key files carrying domain tags and per-question rationale.
+- **Format:** `exam-N-questions.md` + `exam-N-answers.md`. Exams 1/4/5/6 use prose answer
+  keys with rationale; exams 2/3 use a compact table with none, so those items carry the
+  answer but a thinner explanation.
+- **Stance worth repeating:** the author states every item is written against the public
+  blueprint, not drawn from real exam content.
+- **Licence:** **MIT**.
+
+## 9. pankajarm — cca-f-game ("Architect's Ascent")
+
+- **URL:** https://github.com/pankajarm/cca-f-game
+- **Archived at:** `sources/architects-ascent/`
+- **Contributed:** **192 questions**, keyed by game "floor" in a `window.BANK` literal,
+  each with an explanation, a hint, a difficulty and domain tags. Described upstream as
+  "generated and adversarially verified June 2026".
+- **Licence:** No LICENSE file. Archived with attribution.
+
+## 10. kamiimeteor — cca-f-dojo
+
+- **URL:** https://github.com/kamiimeteor/cca-f-dojo
+- **Archived at:** `sources/cca-f-dojo/`
+- **Contributed:** **168 questions** — and the highest quality per item of any source.
+  Indexed against all 30 official task statements, with difficulty ratings, a marked
+  "strongest distractor", **per-distractor explanations**, and multiple-response items.
+- **Format quirk:** bilingual. `assets/data/questions.js` holds the authoritative
+  structure with Chinese text; `content.en.q1.js` / `content.en.q2.js` overlay English by
+  id. The parser merges the two and skips any item lacking an English overlay.
+- **Licence:** **MIT**.
+
+## 11. Amey-Thakur — CLAUDE-CERTIFICATIONS
+
+- **URL:** https://github.com/Amey-Thakur/CLAUDE-CERTIFICATIONS
+- **Archived at:** `sources/amey-thakur/`
+- **Contributed:** **80 questions** (40 practice + three 60-item mocks, filtered to
+  `architect-foundations`). Clean `question-bank.json` with options as a letter map,
+  answer letter, and a rationale.
+- **Also contains** 240 further questions for the sibling certifications (CCAO-F, CCDV-F,
+  CCAR-P) which are *not* merged into this bank — different exams, different blueprints.
+  They are archived and available if you are sitting one of those.
+- **Licence:** **MIT**.
+
+## 12. mominurr — cca-f-mock-exam
+
+- **URL:** https://github.com/mominurr/cca-f-mock-exam
+- **Archived at:** `sources/mominurr-mock/`
+- **Contributed:** **60 questions**, domain-aligned, each with an explanation *and* a
+  `wrongAnswerExplanations` map covering every distractor.
+- **Licence:** **MIT**.
+
+## 13. olgun-yilmaz — ClaudeCertifiedArchitectFoundations
+
+- **URL:** https://github.com/olgun-yilmaz/ClaudeCertifiedArchitectFoundations
+- **Archived at:** `sources/olgun-generated/`
+- **Contributed:** **52 unique questions** from 110 parsed — its four generated exams
+  reuse items across sets, so 58 deduped away. Every item carries domain, subtopic,
+  scenario, an explanation and a `Why-A`..`Why-D` breakdown.
+- **Also includes** a `cert-exam-generator` Claude skill and an exam simulator.
+- **Licence:** **MIT**.
+
+## 14. shourabhmodak — claude-certified-architect-exam-prep
+
+- **URL:** https://github.com/shourabhmodak/claude-certified-architect-exam-prep
+- **Archived at:** `sources/shourabh-simulator/`
+- **Contributed:** **20 questions** from `cca-f-simulator.html`. Notable for being the
+  only source with **code-block stems** — you are shown a snippet of a broken agentic
+  loop and asked what is wrong. Those render as code on the site.
+- **Also includes** five domain cheat sheets and a quick-reference.
+- **Licence:** No LICENSE file. Archived with attribution.
+
+## 15. timothywarner-org — claude-architect
+
+- **URL:** https://github.com/timothywarner-org/claude-architect
+- **Archived at:** `sources/tim-warner/` (markdown docs + `practice-questions.json` only —
+  the full repo vendors ~550 MB of notebooks and cookbooks)
+- **Contributed:** **0 unique questions.** All 60 deduped against the mc-marcocheng gist.
+  Both descend from Paul Larionov's study repo, which the repo credits explicitly and
+  which now 404s. The merge found this independently, which is a good sign for the
+  dedup rule.
+- **Still valuable for:** five domain reference guides, `EXAM-STUDY-PATH.md` and an
+  `EMERGENCY-CARD.md` that fed the cheat sheets.
+- **Licence:** **MIT**, © Tim Warner.
+
+---
+
+# Sources that shaped the guides but contributed no questions
+
+Archived because the cheat sheets are distilled from them.
+
+| Source | Archived at | What it gave |
+|---|---|---|
+| [vkorost/claude-certified-architect-guide](https://github.com/vkorost/claude-certified-architect-guide) | `sources/vkorost-book/` | A 12-chapter book (~740 KB); the deepest treatment of escalation, provenance and error propagation |
+| [preporato/claude-certification-guide](https://github.com/preporato/claude-certification-guide) | `sources/preporato-guides/` | Study guides for all four Claude certifications (147★, the most-starred in the topic) |
+| [DaStru/cca-f-cheat-sheet](https://github.com/DaStru/cca-f-cheat-sheet) | `sources/dastru-cheatsheet/` | A single dense revision sheet |
+| [AgustinVillagran/cca-f-study-guide](https://github.com/AgustinVillagran/cca-f-study-guide) | `sources/agustin-guide/` | Mental models and anti-patterns framing |
+| [dnacenta/claude-certified-architect](https://github.com/dnacenta/claude-certified-architect) | `sources/dnacenta/` | Five domain deep-dives; the exam-logistics facts |
+| [hamzafarooq/claude-certified-architect](https://github.com/hamzafarooq/claude-certified-architect) | `sources/hamza-farooq/` | Five domain cheat sheets + the official sample questions |
+| [K21 Academy](https://k21academy.com/claude/ccar-f-labs-build-ai-agents/) | `sources/k21academy/` | Exam logistics and the 33-lab curriculum |
+
+# Deliberately not scraped
+
+Commercial banks that advertise large question counts behind a paywall — ExamHeist (175),
+CertStud (300+), Preporato practice tests (360), CertificationPractice (360), SkillCertPro,
+and the Udemy course. Their content is client-rendered and paid; taking it would be both a
+licence problem and unverifiable. Every question in this bank is openly published,
+attributable, and carries a written explanation, which is what makes it useful for study.
+
+---
+
 ## Removal
 
 If you authored any material archived here and would rather it not be, open an issue and

@@ -1,0 +1,41 @@
+/* ---------- Design tokens (theme variables) ---------- */
+
+:root {
+  --ink: #12151b;
+  --ink-2: #191e27;
+  --ink-3: #1f2530;
+  --line: #2b3240;
+  --text: #e9ebf0;
+  --text-dim: #8b93a6;
+  --copper: #d69a54;
+  --copper-dim: #7a5a34;
+  --copper-hover: #e2ac6c;
+  --correct: #5fb488;
+  --incorrect: #d16a5a;
+  --copper-rgb: 214, 154, 84;
+  --correct-rgb: 95, 180, 136;
+  --incorrect-rgb: 209, 106, 90;
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --font-mono: ui-monospace, "Cascadia Code", "SFMono-Regular", Consolas, Menlo, monospace;
+  --font-sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: Georgia, "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+  --radius: 6px;
+}
+
+:root[data-theme="light"] {
+  --ink: #f5f2ec;
+  --ink-2: #ffffff;
+  --ink-3: #ece7db;
+  --line: #ddd5c5;
+  --text: #211d17;
+  --text-dim: #6b6357;
+  --copper: #9a5c26;
+  --copper-dim: #cba878;
+  --copper-hover: #7f4a1d;
+  --correct: #2e7d52;
+  --incorrect: #b23c2e;
+  --copper-rgb: 154, 92, 38;
+  --correct-rgb: 46, 125, 82;
+  --incorrect-rgb: 178, 60, 46;
+  --shadow-color: rgba(33, 29, 23, 0.14);
+}

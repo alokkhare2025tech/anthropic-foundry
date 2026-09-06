@@ -1,0 +1,4 @@
+interface:
+  display_name: "CCAR-F Exam Generator"
+  short_description: "Generate grounded CCAR-F practice exams"
+  default_prompt: "Use $cert-exam-generator to create a grounded CCAR-F practice exam."

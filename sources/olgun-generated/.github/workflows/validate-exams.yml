@@ -1,0 +1,27 @@
+name: Validate exams
+
+# The pre-commit hook only runs on clones that opted in with
+# `git config core.hooksPath .githooks`, so run the same check here for everyone.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "ExamGenerator/GeneratedExams/**"
+      - "scripts/validate-exams.js"
+      - ".github/workflows/validate-exams.yml"
+  pull_request:
+    paths:
+      - "ExamGenerator/GeneratedExams/**"
+      - "scripts/validate-exams.js"
+      - ".github/workflows/validate-exams.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      # Zero dependencies, so there is nothing to install.
+      - run: node scripts/validate-exams.js

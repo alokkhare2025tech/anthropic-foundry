@@ -1,0 +1,137 @@
+/* ---------- Results ---------- */
+
+.results-head {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 0.3rem;
+}
+.results-title { font-size: 1.8rem; margin: 0 0 1.4rem; font-weight: 700; }
+
+.score-card {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--correct);
+  border-radius: var(--radius);
+  background: var(--ink-2);
+  padding: 1.6rem;
+  text-align: center;
+  margin-bottom: 1.4rem;
+}
+.score-card.fail { border-left-color: var(--incorrect); }
+
+.score-hero { font-family: var(--font-mono); line-height: 1; }
+.score-earned { font-size: 3.4rem; font-weight: 700; color: var(--text); }
+.score-slash, .score-total { font-size: 2.2rem; color: var(--text-dim); }
+
+.verdict {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  margin-top: 0.7rem;
+}
+.verdict-pass { color: var(--correct); }
+.verdict-fail { color: var(--incorrect); }
+
+.subline { color: var(--text-dim); font-size: 0.92rem; margin-top: 0.55rem; }
+
+.domain-panel, .save-panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--ink-2);
+  padding: 1.3rem 1.4rem;
+  margin-bottom: 1.4rem;
+}
+
+.domain-panel-head, .save-head {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1.1rem;
+}
+
+.dom-row { margin-bottom: 1.05rem; }
+.dom-row:last-child { margin-bottom: 0; }
+
+.dom-row-top {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin-bottom: 0.4rem;
+}
+.dom-dot { width: 0.65rem; height: 0.65rem; border-radius: 50%; flex: 0 0 auto; align-self: center; }
+.dom-code { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-dim); }
+.dom-name { flex: 1; font-size: 0.92rem; }
+.dom-stat { font-family: var(--font-mono); font-size: 0.82rem; color: var(--text); white-space: nowrap; }
+.dom-pts { color: var(--copper); margin-left: 0.4rem; }
+
+.dom-bar { height: 8px; border-radius: 4px; background: var(--ink-3); overflow: hidden; }
+.dom-fill { height: 100%; width: 0%; border-radius: 4px; }
+@media (prefers-reduced-motion: no-preference) { .dom-fill { transition: width 0.5s ease; } }
+
+.save-buttons { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.8rem; }
+.save-hint { font-size: 0.82rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 0.9rem; }
+.save-hint code { font-family: var(--font-mono); background: var(--ink-3); padding: 0.05rem 0.3rem; border-radius: 4px; }
+.save-status { font-family: var(--font-mono); font-size: 0.78rem; color: var(--correct); margin-left: 0.3rem; }
+
+.autosave-banner {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--copper-dim);
+  background: rgba(var(--copper-rgb), 0.08);
+  color: var(--text);
+  margin-bottom: 1.4rem;
+}
+.autosave-banner.ok { border-color: var(--correct); background: rgba(var(--correct-rgb), 0.08); }
+.autosave-banner.err { border-color: var(--incorrect); background: rgba(var(--incorrect-rgb), 0.08); }
+
+.report-pre {
+  width: 100%;
+  height: 220px;
+  resize: vertical;
+  background: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  padding: 0.8rem;
+}
+
+.review-hint {
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  padding: 0.5rem;
+}
+
+/* ---------- Saved result (compact) ---------- */
+
+.card.mini-review {
+  padding: 1rem 1.1rem;
+  margin-bottom: 0.9rem;
+}
+.card.mini-review:last-child { margin-bottom: 0; }
+.mini-stem { font-size: 1rem; margin-bottom: 0.85rem; }
+.mini-scenario {
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+}
+
+.raw-report { margin-bottom: 1.4rem; }
+.raw-report summary {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.raw-report summary:hover { color: var(--text); }
+.raw-report .report-pre { margin-top: 0.7rem; height: 160px; }

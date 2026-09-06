@@ -1,0 +1,126 @@
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  markdown:
+    name: Markdown lint and spelling
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Lint markdown
+        uses: DavidAnson/markdownlint-cli2-action@21c1be1b93ad9ed58fa840aacc3f279cde2a72ff  # v24.2.0
+        with:
+          globs: "**/*.md"
+          config: .github/.markdownlint.jsonc
+      - name: Spell check
+        uses: codespell-project/actions-codespell@8f01853be192eb0f849a5c7d721450e7a467c579  # v2.2
+        with:
+          skip: "*.pdf,*.png,./.git"
+
+  metadata:
+    name: Citation metadata matches the newest release
+    runs-on: ubuntu-latest
+    steps:
+      # Tags are what the version is checked against, and the default shallow
+      # checkout does not fetch them.
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - run: python .github/scripts/check_metadata.py
+
+  scripts:
+    name: Scripts compile and generated files are current
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Compile every script
+        run: python -m compileall -q .github/scripts .github/pages
+      - name: Lint for unused names and undefined references
+        run: |
+          pip install --quiet pyflakes==3.4.0
+          python -m pyflakes .github/scripts/*.py .github/pages/*.py
+      - name: Shell syntax
+        run: bash -n .github/pages/assemble.sh
+      - name: House spelling stays American
+        run: |
+          python - <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+          WORDS = ("behaviour organis catalogue licence utilis recognis memoris programme "
+                   "labelled centre practise prioritis colour whilst amongst modelling "
+                   "customis defence offence").split()
+          PATTERN = re.compile(r"\b\w*(" + "|".join(WORDS) + r")\w*\b", re.I)
+          KEEP = (".md", ".py", ".tsv", ".yml", ".css", ".js")
+          # This file names the forms it forbids, so it excludes itself.
+          SKIP = ("/.git/", "site-src/", "_site/", "__pycache__", ".github/workflows/")
+          found = []
+          for path in sorted(Path(".").rglob("*")):
+              if not path.is_file() or path.suffix not in KEEP:
+                  continue
+              if any(s in path.as_posix() for s in SKIP):
+                  continue
+              text = path.read_text(encoding="utf-8", errors="replace")
+              found += [f"{path}: {m.group(0)}" for m in PATTERN.finditer(text)]
+          if found:
+              print("This repository is written in American English. Found:")
+              print("\n".join(found[:40]))
+              sys.exit(1)
+          print(f"spelling is uniform across {len(WORDS)} watched forms")
+          PY
+      - name: Regenerate the derived files and fail if they drift
+        run: |
+          python .github/scripts/build_question_bank.py
+          python .github/scripts/build_tracker.py
+          python .github/scripts/build_flashcards.py
+          git diff --exit-code -- question-bank.json flashcards.tsv \
+            guide/flashcards.md .github/assets/tracker.json .github/assets/flashcards.json
+      # The same badges are shown in three galleries. They are written from one
+      # list rather than kept in step by hand, which is what let a badge be
+      # added to two of the three and missed in the other.
+      - name: Badge galleries match the badge list
+        run: python .github/scripts/build_badges.py --check
+      # The images and the companion need a browser, and the companion is set in a
+      # font the runner does not have, so re-rendering here would differ byte
+      # for byte with nothing wrong. This asks the question that matters
+      # instead: did a source change after the artifact was last built?
+      - name: Images and companion are current with their sources
+        run: python .github/scripts/build_images.py --verify
+      # Reads the figures straight out of the mirrored exam guides and compares
+      # them to the documentation, so a "facts last verified" date is a checked
+      # claim rather than an asserted one.
+      - name: Documented figures match the official exam guides
+        run: |
+          pip install --quiet pymupdf
+          python .github/scripts/verify_facts.py
+      # The badge count lives in five places and has drifted twice when one was
+      # added by hand. This derives it from the files and makes the rest agree.
+      - name: Badge counts agree with the badges that exist
+        run: python .github/scripts/check_badges.py
+      # Options in the markdown must read A, B, C, D. The shuffling belongs to
+      # mock_exam.py and the site quiz at run time, not to the source file.
+      - name: Questions are ordered, lettered, and correctly keyed
+        run: python .github/scripts/check_questions.py
+      # The companion's pages are a fixed size and clip what does not fit, so a
+      # page that has outgrown itself looks finished with its last lines gone.
+      # This measures every page in a browser instead of trusting the render.
+      - name: Companion pages neither overflow nor overlap
+        run: |
+          python -m pip install --quiet playwright
+          python -m playwright install --with-deps chromium
+          python .github/scripts/build_companion.py
+          python .github/scripts/check_companion_layout.py

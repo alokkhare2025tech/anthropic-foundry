@@ -1,0 +1,35 @@
+/* ---------- Reset / base ---------- */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html { transition: background-color 0.15s ease; }
+  body, .app-header, .sidebar, .card, .choice, .btn, .theme-toggle { transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header header"
+    "nav    main";
+}
+
+a { color: var(--copper); }
+
+:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 2px;
+}
+
+button { font-family: var(--font-sans); }
