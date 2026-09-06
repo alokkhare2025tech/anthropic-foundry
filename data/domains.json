@@ -1,0 +1,103 @@
+[
+  {
+    "id": 1,
+    "title": "Agentic Architecture & Orchestration",
+    "weight": 27,
+    "blurb": "Deciding when a problem actually needs an agent, decomposing it, and wiring coordinators to subagents without losing observability.",
+    "tasks": [
+      "1.1 Design agentic loops for autonomous task execution",
+      "1.2 Apply multi-agent coordinator–subagent patterns",
+      "1.3 Configure subagent invocation, context passing, and spawning",
+      "1.4 Implement multi-step workflows with enforcement and handoff patterns",
+      "1.5 Apply Agent SDK hooks for tool-call interception and normalisation",
+      "1.6 Design task decomposition strategies for complex workflows",
+      "1.7 Manage session state, resumption, and forking"
+    ],
+    "keywords": [
+      "coordinator", "subagent", "sub-agent", "multi-agent", "orchestrat",
+      "agentic loop", "decompos", "delegat", "hand-off", "handoff", "hook",
+      "PreToolUse", "PostToolUse", "stop_reason", "Task tool", "spawn",
+      "session state", "fork", "resume", "parallel", "workflow"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Tool Design & MCP Integration",
+    "weight": 18,
+    "blurb": "Tool schemas, descriptions and error contracts — plus when to reach for a built-in tool, a custom tool, or an MCP server.",
+    "tasks": [
+      "2.1 Design effective tool interfaces with clear descriptions and boundaries",
+      "2.2 Implement structured error responses for MCP tools",
+      "2.3 Distribute tools across agents and configure tool_choice",
+      "2.4 Integrate MCP servers into Claude Code and agent workflows",
+      "2.5 Select and apply built-in tools (Read, Write, Edit, Bash, Grep, Glob)"
+    ],
+    "keywords": [
+      "tool description", "tool schema", "tool_choice", "MCP", "mcp server",
+      "stdio", "SSE", "transport", "built-in tool", "Grep", "Glob",
+      "structured error", "error response", "tool sprawl", "tool selection",
+      "input_schema", "retryable"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Claude Code Configuration & Workflows",
+    "weight": 20,
+    "blurb": "CLAUDE.md hierarchy, rules, skills, slash commands, plan mode, and running Claude Code headless in CI.",
+    "tasks": [
+      "3.1 Configure CLAUDE.md hierarchy, scoping, and modular organisation",
+      "3.2 Create custom slash commands and skills",
+      "3.3 Apply path-specific rules for conditional convention loading",
+      "3.4 Determine when to use plan mode vs direct execution",
+      "3.5 Apply iterative refinement techniques",
+      "3.6 Integrate Claude Code into CI/CD pipelines"
+    ],
+    "keywords": [
+      "CLAUDE.md", ".claude/", "slash command", "skill", "plan mode",
+      "planning mode", "rules", "glob pattern", "frontmatter", "CI/CD",
+      "pipeline", "headless", "--print", "-p ", "non-interactive",
+      "pull request", "pre-commit", "hooks directory", "settings.json"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Prompt Engineering & Structured Output",
+    "weight": 20,
+    "blurb": "Explicit criteria over vague adjectives, few-shot that targets the failure mode, JSON schemas, and bounded validation loops.",
+    "tasks": [
+      "4.1 Design prompts with explicit criteria to reduce false positives",
+      "4.2 Apply few-shot prompting for consistency and quality",
+      "4.3 Enforce structured output using tool use and JSON schemas",
+      "4.4 Implement validation, retry, and feedback loops",
+      "4.5 Design efficient batch processing strategies",
+      "4.6 Design multi-instance and multi-pass review architectures"
+    ],
+    "keywords": [
+      "few-shot", "system prompt", "explicit criteria", "false positive",
+      "JSON schema", "structured output", "output-format", "validation",
+      "retry", "correction prompt", "batch", "Message Batches", "extraction",
+      "prompt", "example", "enum", "nested object", "temperature"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Context Management & Reliability",
+    "weight": 15,
+    "blurb": "Keeping the right information alive across long runs, escalating to humans on the right signal, and failing loudly instead of silently.",
+    "tasks": [
+      "5.1 Preserve critical information across long interactions",
+      "5.2 Design escalation and ambiguity resolution patterns",
+      "5.3 Implement error propagation across multi-agent systems",
+      "5.4 Manage context in large codebase exploration",
+      "5.5 Design human review workflows and confidence calibration",
+      "5.6 Preserve provenance and handle uncertainty in multi-source synthesis"
+    ],
+    "keywords": [
+      "context window", "compact", "summari", "memory", "persist",
+      "escalat", "human-in-the-loop", "human review", "confidence",
+      "calibrat", "provenance", "citation", "lost in the middle",
+      "error propagation", "partial failure", "timeout", "degraded",
+      "token usage", "context isolation"
+    ]
+  }
+]
